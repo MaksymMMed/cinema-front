@@ -1,0 +1,20 @@
+.main-banner{
+
+}
+
+.new-movies{
+    margin-top: 40px;
+    background-color: #d9d9d9;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+ 
+.promoted-movies{
+    margin-top: 40px;
+    background-color: #d9d9d9;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+

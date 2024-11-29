@@ -1,23 +1,22 @@
-// src/pages/SignInPage.tsx
-import React, { useState } from 'react';
-import { signUp } from '../../api/AccountApi';
-import { TokenDto } from '../../DTOs/Account/TokenDto';
-import Input from '../../UI/Input/Input';
+import Input from '../../../UI/Input/Input';
+import Button from '../../../UI/Button/Button';
 import styles from './SignUpPage.module.css'
-import Button from '../../UI/Button/Button';
 import Cookies from 'js-cookie'
+import { useState } from 'react';
+import { TokenDto } from '../../../DTOs/Account/TokenDto';
 import { Link, useNavigate } from 'react-router-dom';
-import { SignUpDto, SignUpDtoHelper } from '../../DTOs/Account/SignUpDto';
+import { SignUpDtoHelper } from '../../../DTOs/Account/SignUpDto';
+import { signUp } from '../../../Api/AccountApi';
 
 const SignUpPage = () => {
     const [signUpDto, setSignUpDto] = useState<SignUpDtoHelper>({ email: '', password: '',repeatPassword:'',
         firstName:'',lastName:''});
     const [error, setError] = useState<string | null>(null);
     const navigate = useNavigate();
+    
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
         setSignUpDto((prev) => ({ ...prev, [name]: value })); 
-        
     };
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -27,7 +26,7 @@ const SignUpPage = () => {
             const tokenData: TokenDto = await signUp(signUpDto.email, signUpDto.password,signUpDto.repeatPassword,signUpDto.firstName,signUpDto.lastName);
             console.log("Login successful: ", tokenData);
             Cookies.set('token',tokenData.token,{expires: new Date(tokenData.expiration)})
-            navigate('')
+            navigate('/')
 
         } catch (err: any) {
             setError(err.message);

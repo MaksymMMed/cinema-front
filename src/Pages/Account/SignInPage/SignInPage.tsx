@@ -1,13 +1,12 @@
-// src/pages/SignInPage.tsx
-import { SignInDto } from '../../DTOs/Account/SignInDto';
-import React, { useState } from 'react';
-import { signIn } from '../../api/AccountApi';
-import { TokenDto } from '../../DTOs/Account/TokenDto';
-import Input from '../../UI/Input/Input';
-import styles from './SignInPage.module.css'
-import Button from '../../UI/Button/Button';
 import Cookies from 'js-cookie'
+import Input from '../../../UI/Input/Input';
+import Button from '../../../UI/Button/Button';
+import styles from './SignInPage.module.css'
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { SignInDto } from '../../../DTOs/Account/SignInDto';
+import { TokenDto } from '../../../DTOs/Account/TokenDto';
+import { signIn } from '../../../Api/AccountApi';
 
 const SignInPage = () => {
     const [signInDto, setSignInDto] = useState<SignInDto>({ email: '', password: '' });
@@ -28,10 +27,10 @@ const SignInPage = () => {
         e.preventDefault();
         setError(null);
         try {
-            const tokenData: TokenDto = await signIn(signInDto.email, signInDto.password);
+            const tokenData: TokenDto = await signIn(signInDto);
             console.log("Login successful: ", tokenData);
             Cookies.set('token',tokenData.token,{expires: new Date(tokenData.expiration)})
-            navigate('')
+            navigate('/')
 
         } catch (err: any) {
             setError(err.message);
