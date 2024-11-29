@@ -19,7 +19,8 @@ function App() {
                 <Route path="/" element={<Wrapper><MainPage/></Wrapper> } />
                 <Route path="/profile" element={<Wrapper><ProfilePage/></Wrapper> } />
                 <Route path="/film/:id" element={<Wrapper><MoviePage/></Wrapper> } />
-                <Route path="/films" element={<Wrapper><SearchMoviePage/></Wrapper> } />
+                <Route path="/films"
+                element={<Wrapper><SearchMoviePage/></Wrapper> } />
                 <Route path="/*" element={<NotFoundPage/>} />
             </Routes>
       </BrowserRouter>

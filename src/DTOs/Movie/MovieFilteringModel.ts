@@ -5,4 +5,7 @@ export interface MovieFilteringModel{
     toReleaseDate?:string;
     genresIds?:string[]
     currentlyShowing?:boolean;
+    sortingField?:string;
+    pageNumber?:number
+    pageSize?:number
 }
