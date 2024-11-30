@@ -8,6 +8,7 @@ import SignInPage from './Pages/Account/SignInPage/SignInPage';
 import SignUpPage from './Pages/Account/SignUpPage/SignUpPage';
 import SearchMoviePage from './Pages/SearchMoviePage/SearchMoviePage';
 import ProfilePage from './Pages/Account/ProfilePage/ProfilePage';
+import BookingPage from './Pages/BookingPage/BookingPage';
 
 function App() {
   return (
@@ -19,8 +20,9 @@ function App() {
                 <Route path="/" element={<Wrapper><MainPage/></Wrapper> } />
                 <Route path="/profile" element={<Wrapper><ProfilePage/></Wrapper> } />
                 <Route path="/film/:id" element={<Wrapper><MoviePage/></Wrapper> } />
-                <Route path="/films"
-                element={<Wrapper><SearchMoviePage/></Wrapper> } />
+                <Route path="/films" element={<Wrapper><SearchMoviePage/></Wrapper> } />
+                <Route path="/booking" element={<Wrapper><BookingPage/></Wrapper> } />
+
                 <Route path="/*" element={<NotFoundPage/>} />
             </Routes>
       </BrowserRouter>

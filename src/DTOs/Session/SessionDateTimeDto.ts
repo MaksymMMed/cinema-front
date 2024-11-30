@@ -1,5 +1,5 @@
 export interface SessionDateTimeDto {
-    id:string
+    sessionId:string
     dateUtc:Date
   }
   

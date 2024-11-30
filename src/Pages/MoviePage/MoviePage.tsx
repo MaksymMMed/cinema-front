@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import './MoviePage.css';
 import Slider from "../../UI/Slilder/Slider";
 import { MovieDetailsDto } from "../../DTOs/Movie/MovieDetailsDto";
@@ -9,6 +9,7 @@ import CommentCard from "../../UI/CommentCard/CommentCard";
 import SessionCard from "../../UI/SessionCard/SessionCard";
 
 const MoviePage = () => {
+  const navigate = useNavigate()
   const { id } = useParams<{ id: string }>();
   const [movieDetails, setMovieDetails] = useState<MovieDetailsDto | null>(null);
 
@@ -27,6 +28,10 @@ const MoviePage = () => {
     fetchMovieDetails();
   }, [id]);
 
+  const handleBooking = () =>{
+    navigate(`/booking?sessionId=${movieDetails?.fiveClosestSessions[0].sessionId}`);
+  }
+
   if (!movieDetails) {
     return <p>Loading...</p>;
   }
@@ -41,7 +46,7 @@ const MoviePage = () => {
       <div className="movie-info">
         <div className="small-banner">
           <img src={movieDetails.imageUrl} alt={movieDetails.name} />
-          <Button style={{marginTop:'20px'}} size="xl">Booking</Button>
+          <Button onClick={handleBooking} style={{marginTop:'20px'}} size="xl">Booking</Button>
         </div>
         <div className="movie-description">
           <h1>{movieDetails.name}</h1>
@@ -57,7 +62,9 @@ const MoviePage = () => {
       </div>
       <div className="closest-sessions">
         {movieDetails.fiveClosestSessions.map((session)=>(
-          <SessionCard key={session.id} session={session}/>
+          <Link style={{ textDecoration: 'none'}} to={`/booking?sessionId=${session.sessionId}`}>
+            <SessionCard key={session.sessionId} session={session}/>
+          </Link>
         ))}
       </div>
       <div className="similar-movies">

@@ -1,0 +1,64 @@
+.booking-page{
+    padding: 3em 5em 5em;
+}
+
+.booking-movie-info{
+    text-align: start;
+    padding: 0 0 0 2em;
+}
+
+.booking-movie-section{
+    display: flex;
+    justify-content: start;
+}
+
+.session-info{
+    display: flex;
+    justify-content: start;
+    text-align: start;
+}
+
+.hall-section{
+    margin-top: 4em;
+    display: flex;
+    justify-content: space-between;
+}
+
+.hall-schema {
+    width: 70%;
+    background-color: #d6d6d6;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center; /* Centers the seat rows horizontally */
+}
+
+.hall-row {
+    display: flex;
+    justify-content: center; /* Ensures seats are centered in each row */
+    margin-bottom: 5px; /* Space between rows */
+}
+
+.seat {
+    width: 40px;
+    height: 40px;
+    margin-right: 5px;
+    background-color: grey; /* Default color */
+    border: 1px solid #ddd;
+    display: inline-block;
+}
+
+.seat.occupied {
+    background-color: red;
+}
+
+.reservation-section{
+    border: 2px solid black;
+    width: 25%;
+}
+
+.reservation-section hr{
+    width: 70%;
+    border: 1px solid black;
+}
