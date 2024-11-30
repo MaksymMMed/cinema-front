@@ -18,9 +18,9 @@ const TicketsDropdownList: React.FC<TicketsDropdownProps> = ({tickets,price,isPa
       </summary>
       <div style={{ marginTop: '10px' }}>
         {tickets.map((ticket)=>(
-          <div style={{border:'1px solid black',padding:'0 10px',borderRadius:'10px'}} >
+          <div style={{border:'1px solid black',padding:'0 10px',borderRadius:'10px',marginTop:'2px'}} >
             <p>
-              Row {ticket.rowIndex}, Seat {ticket.seatIndex}
+              Row {ticket.rowIndex+1}, Seat {ticket.seatIndex+1}
             </p>
           </div>
         ))}

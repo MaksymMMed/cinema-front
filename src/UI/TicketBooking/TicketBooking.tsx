@@ -4,12 +4,17 @@ import Button from '../Button/Button';
 import { SessionDetailsDto } from '../../DTOs/Session/SessionDetailsDto';
 import { HallDetailReadDto } from '../../DTOs/Hall/HallDetailReadDto';
 import { getHallDetails } from '../../Api/HallApi';
+import { purchaseTickets } from '../../Api/PurchaseApi';
+import { CreateTicketsDto } from '../../DTOs/Ticket/CreateTicketsDto';
+import { HallSeatDto } from '../../DTOs/Hall/HallSeatDto';
 
 interface TicketBookingProps {
   sessionDetails: SessionDetailsDto;
 }
 
 const TicketBooking: React.FC<TicketBookingProps> = ({ sessionDetails }) => {
+
+  const [ticketsDto,setTicketsDto] = useState<CreateTicketsDto>()
   const [hallDetails, setHallDetails] = useState<HallDetailReadDto | null>(null);
   const [selectedSeats, setSelectedSeats] = useState<string[]>([]);
   const [finalPrice, setFinalPrice] = useState<number>(0);
@@ -44,6 +49,29 @@ const TicketBooking: React.FC<TicketBookingProps> = ({ sessionDetails }) => {
       return updatedSeats;
     });
   };
+
+  const handleBooking = async () => {
+    if (!hallDetails) return;
+  
+    const seats: HallSeatDto[] = selectedSeats.map((seatIdentifier) => {
+      const [rowIndex, seatIndex] = seatIdentifier.split('-').map(Number);
+      return { rowIndex, index: seatIndex };
+    });
+  
+    const ticketsDto: CreateTicketsDto = {
+      sessionId: sessionDetails.id,
+      hallSeats: seats,
+    };
+  
+    try {
+      console.log(ticketsDto)
+      const response = await purchaseTickets(ticketsDto);
+      window.location.href = response;
+    } catch (error:any) {
+      console.error('Booking failed:', error.message);
+    }
+  };
+  
 
   if (!hallDetails) return <p>Loading hall details...</p>;
 
@@ -82,7 +110,7 @@ const TicketBooking: React.FC<TicketBookingProps> = ({ sessionDetails }) => {
           )}
           <hr />
           <p>Final price: {finalPrice.toFixed(2)} UAH</p>
-          <Button size="xl" onClick={() => alert('Booking confirmed!')}>Booking</Button>
+          <Button size="xl" onClick={() => handleBooking()}>Booking</Button>
         </div>
       </div>
     </div>
