@@ -19,7 +19,7 @@
 
 .closest-sessions{
     display: flex;
-    justify-content: space-evenly;
+    justify-content: start;
     width: 70%;
     padding: 10px 15px;
     margin: auto;

@@ -4,6 +4,7 @@ import './BookingPage.css'
 import { useEffect, useState } from 'react';
 import { getSessionDetails } from '../../Api/SessionApi';
 import { SessionDetailsDto } from '../../DTOs/Session/SessionDetailsDto';
+import TicketBooking from '../../UI/TicketBooking/TicketBooking';
 
 const BookingPage = () => {
     const location = useLocation();
@@ -61,36 +62,20 @@ const BookingPage = () => {
                             <p>hall:</p>
                             <p>{sessionDetails?.hallName}</p>
                         </div>
+                        <div style={{marginLeft:'15px'}}>
+                            <p>base price:</p>
+                            <p>{sessionDetails?.basePrice} UAH</p>
+                        </div>
                     </div>
                 </div>
             </div>
-
-            <div className='hall-section'>  
-            <div className='hall-schema'>
-                {sessionDetails?.seats.map((seatRow, rowIndex) => (
-                    <div key={rowIndex} className='hall-row'>
-                        {seatRow.map((seat, seatIndex) => (
-                            <div 
-                                key={seatIndex} 
-                                className={`seat ${seat ? 'occupied' : ''}`}
-                            >
-                            </div>
-                        ))}
-                    </div>
-                ))}
-            </div>
-
-                <div className='reservation-section'>
-                    <p>Your reservation</p>
-                    <hr />
-                    <p>ticket 1</p>
-                    <p>ticket 1</p>
-                    <p>ticket 1</p>
-                    <hr />
-                    <p>Final price: 450 uah</p>
-                    <Button size='xl'>Booking</Button>
-                </div>
-            </div>
+            {sessionDetails 
+            ?(
+                <TicketBooking sessionDetails={sessionDetails} />
+            ) 
+            :(
+                <p>Loading...</p>
+            )}
         </div>
     )
 }

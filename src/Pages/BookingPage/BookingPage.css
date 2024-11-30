@@ -53,6 +53,10 @@
     background-color: red;
 }
 
+.seat.selected {
+    background-color: green;
+  }
+
 .reservation-section{
     border: 2px solid black;
     width: 25%;

@@ -62,7 +62,7 @@ const MoviePage = () => {
       </div>
       <div className="closest-sessions">
         {movieDetails.fiveClosestSessions.map((session)=>(
-          <Link style={{ textDecoration: 'none'}} to={`/booking?sessionId=${session.sessionId}`}>
+          <Link style={{ textDecoration: 'none',margin:'0 0 0 15px'}} to={`/booking?sessionId=${session.sessionId}`}>
             <SessionCard key={session.sessionId} session={session}/>
           </Link>
         ))}
