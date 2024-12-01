@@ -9,7 +9,7 @@ interface WrapperProps {
 
 const Wrapper: React.FC<WrapperProps> = ({ children }) => {
   const navigate = useNavigate();
-  const [showSearch, setShowSearch] = useState(false); // Стан для пошукового рядка
+  const [showSearch, setShowSearch] = useState(false);
   const [movieName, setMovieName] = useState<string>("");
 
   const checkCookie = () => {
@@ -19,47 +19,46 @@ const Wrapper: React.FC<WrapperProps> = ({ children }) => {
     }
   };
 
+  const handleSearch = () =>{
+    setShowSearch(false)
+    navigate(`/films?name=${movieName}`)
+  }
+
   useEffect(() => {
     checkCookie();
   }, []);
 
   return (
     <div style={{ display: 'block' }}>
-      <div
-        style={{
+      <div style={{
           width: '100%',
           background: '#FF7A00',
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
           padding: '1em',
-        }}
-      >
-        <Link
-          style={{ textDecoration: 'none', fontSize: '1.2em', color: 'white' }}
-          to="/"
-        >
+        }}>
+        <Link style={{ textDecoration: 'none', fontSize: '1.2em', color: 'white' }} to="/">
           VistaCinema
         </Link>
-        <img
-          style={{ width: '32px', height: '32px', cursor: 'pointer' }}
-          src="./searchIcon.png"
-          alt="Search"
-          onClick={() => setShowSearch(!showSearch)}
-        />
-        <Link
-          style={{ textDecoration: 'none', fontSize: '1.2em', color: 'white' }}
-          to="/profile"
-        >
-          MyAccount
-        </Link>
+        <div style={{display:'flex'}}>
+          <img
+            style={{ width: '24px', height: '24px', cursor: 'pointer',marginRight:'25px' }}
+            src="./searchIcon.svg"
+            alt="Search"
+            onClick={() => setShowSearch(!showSearch)}
+            />
+          <Link style={{ textDecoration: 'none', fontSize: '1.2em', color: 'white' }} to="/profile">
+            MyAccount
+          </Link>
+        </div>
       </div>
 
       {/* Поле пошуку */}
       {showSearch && (
         <div style={{ width: '50%', padding: '1em', display: 'flex', margin: 'auto' }}>
           <input
-            onChange={(e) => setMovieName(e.target.value)} // Виправлено
+            onChange={(e) => setMovieName(e.target.value)}
             type="text"
             placeholder="Search..."
             style={{
@@ -71,7 +70,7 @@ const Wrapper: React.FC<WrapperProps> = ({ children }) => {
           />
           <Button
             size='s'
-            onClick={() => navigate(`/films?name=${movieName}`)}
+            onClick={() => handleSearch()}
             style={{ marginLeft: '10px' }}
           >
             Find
