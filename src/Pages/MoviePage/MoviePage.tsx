@@ -7,31 +7,58 @@ import { getMovieDetails } from "../../Api/MovieApi";
 import Button from "../../UI/Button/Button";
 import CommentCard from "../../UI/CommentCard/CommentCard";
 import SessionCard from "../../UI/SessionCard/SessionCard";
+import Input from "../../UI/Input/Input";
+import { ReviewCreateDto } from "../../DTOs/Review/ReviewCreateDto";
+import { createReview } from "../../Api/ReviewApi";
 
 const MoviePage = () => {
   const navigate = useNavigate()
   const { id } = useParams<{ id: string }>();
   const [movieDetails, setMovieDetails] = useState<MovieDetailsDto | null>(null);
+  const [reviewCreateDto,setReviewCreateDto] = useState<ReviewCreateDto>({movieId:'',comment:'',rank:0})
 
-  useEffect(() => {
-    const fetchMovieDetails = async () => {
-      try {
-        if (id) {
-          const response = await getMovieDetails(id);
-          console.log(response);
-          setMovieDetails(response);
-        }
-      } catch (error) {
-        console.error("Failed to fetch movie details:", error);
+  const [error, setError] = useState<string | null>(null);
+
+  const fetchMovieDetails = async () => {
+    try {
+      if (id) {
+        const response = await getMovieDetails(id);
+        setMovieDetails(response);
+        setReviewCreateDto((prev) => ({ ...prev, movieId: response.id }));
       }
-    };
-    fetchMovieDetails();
+    } catch (err) {
+      setError("Failed to fetch movie details.");
+    }
+  };
+
+useEffect(() => {
+  fetchMovieDetails();
   }, [id]);
+
 
   const handleBooking = () =>{
     navigate(`/booking?sessionId=${movieDetails?.fiveClosestSessions[0].sessionId}`);
   }
 
+  const handleCreateReview = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      const response = await createReview(reviewCreateDto);
+      console.log(response);
+      fetchMovieDetails()
+    } catch (err: any) {
+      alert(err);
+    }
+  };
+  
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+  
+    if (name === "rank" && (+value < 1 || +value > 10)) return;
+    setReviewCreateDto((prev) => ({ ...prev, [name]: value }));
+  }
+  
   if (!movieDetails) {
     return <p>Loading...</p>;
   }
@@ -68,7 +95,22 @@ const MoviePage = () => {
         ))}
       </div>
       <div className="similar-movies">
-        {/* Add similar movies here */}
+        {/* Add s imilar movies here */}
+      </div>
+      <div className="leave-review-section">
+        <img 
+          src="https://icons.veryicon.com/png/o/internet--web/prejudice/user-128.png" 
+          alt="user logo"
+        />
+        <form onSubmit={handleCreateReview} className="write-review">
+          <div style={{display:'flex'}}>
+            <Input name="comment" onChange={handleChange} required={true} size="xl" placeholder="Leave your review..."/>
+            <Input name="rank" onChange={handleChange} required={true} style={{marginLeft:'3px'}} size="s" placeholder="Set rank from 1 to 10..."/>
+          </div>
+          <Button size="s" type="submit" style={{marginTop:'6px'}}>Add</Button>
+        </form>
+        
+        
       </div>
       <div className="reviews">
         {movieDetails.movieReviews.map((review)=>(
