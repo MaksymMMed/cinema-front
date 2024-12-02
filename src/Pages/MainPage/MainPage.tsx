@@ -8,7 +8,7 @@ import './MainPage.css'
 
 const MainPage = () =>{
 
-    const [movieFilteringModel,setMovieFilteringModel] = useState<MovieFilteringModel>({})
+    const [movieFilteringModel,setMovieFilteringModel] = useState<MovieFilteringModel>({pageNumber:0,pageSize:6})
     const [movieDetails, setMovieDetails] = useState<MovieReadDto[] | null>(null);
 
   useEffect(() => {
@@ -32,7 +32,7 @@ const MainPage = () =>{
 
 
     return(
-        <div>
+        <div className="main-page">
             <div className="main-banner">
                 <Slider style={{width:'30%'}} images={movieDetails.map(x=>x.imageUrl)}/>
             </div>
