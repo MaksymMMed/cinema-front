@@ -9,6 +9,11 @@ const Wrapper = () => {
 	const [showSearch, setShowSearch] = useState(false); // Стан для пошукового рядка
 	const [movieName, setMovieName] = useState<string>('');
 
+	const handleSearch = () => {
+		setShowSearch(false);
+		navigate(`/films?name=${movieName}`);
+	};
+
 	return (
 		<div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
 			<div
@@ -20,35 +25,36 @@ const Wrapper = () => {
 					className="container"
 					style={{
 						margin: 'auto',
-						display: 'flex',
-						justifyContent: 'space-between',
-						alignItems: 'center',
 						padding: '1em',
 					}}>
-					<Link
-						style={{ textDecoration: 'none', fontSize: '1.5em', fontWeight: 600, color: 'white' }}
-						to="/">
-						VistaCinema
-					</Link>
-					<img
-						style={{ width: '32px', height: '32px', cursor: 'pointer' }}
-						src="./searchIcon.png"
-						alt="Search"
-						onClick={() => setShowSearch(!showSearch)}
-					/>
-					{token ? (
+					<div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
 						<Link
-							style={{ textDecoration: 'none', fontSize: '1.2em', color: 'white' }}
-							to="/profile">
-							Профіль
+							style={{ textDecoration: 'none', fontSize: '1.5em', fontWeight: 600, color: 'white' }}
+							to="/">
+							VistaCinema
 						</Link>
-					) : (
-						<Link
-							style={{ textDecoration: 'none', fontSize: '1.2em', color: 'white' }}
-							to="/signin">
-							Увійти|Зареєструватись
-						</Link>
-					)}
+						<div style={{ display: 'flex' }}>
+							<img
+								style={{ width: '24px', height: '24px', cursor: 'pointer', marginRight: '25px' }}
+								src="/searchIcon.svg"
+								alt="Search"
+								onClick={() => setShowSearch(!showSearch)}
+							/>
+							{token ? (
+								<Link
+									style={{ textDecoration: 'none', fontSize: '1.2em', color: 'white' }}
+									to="/profile">
+									Профіль
+								</Link>
+							) : (
+								<Link
+									style={{ textDecoration: 'none', fontSize: '1.2em', color: 'white' }}
+									to="/signin">
+									Увійти|Зареєструватись
+								</Link>
+							)}
+						</div>
+					</div>
 				</div>
 			</div>
 
@@ -56,7 +62,7 @@ const Wrapper = () => {
 			{showSearch && (
 				<div style={{ width: '50%', padding: '1em', display: 'flex', margin: 'auto' }}>
 					<input
-						onChange={(e) => setMovieName(e.target.value)} // Виправлено
+						onChange={(e) => setMovieName(e.target.value)}
 						type="text"
 						placeholder="Search..."
 						style={{
@@ -66,10 +72,7 @@ const Wrapper = () => {
 							borderRadius: '5px',
 						}}
 					/>
-					<Button
-						size="s"
-						onClick={() => navigate(`/films?name=${movieName}`)}
-						style={{ marginLeft: '10px' }}>
+					<Button size="s" onClick={() => handleSearch()} style={{ marginLeft: '10px' }}>
 						Find
 					</Button>
 				</div>

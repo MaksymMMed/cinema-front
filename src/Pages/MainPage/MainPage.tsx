@@ -29,18 +29,10 @@ const MainPage = () => {
 	}
 
 	const itemsPerSlide = 4; // Adjust this value to limit the number of cards per slide
-	const tempMv = [
-		...movieDetails,
-		...movieDetails,
-		...movieDetails,
-		...movieDetails,
-		...movieDetails,
-		...movieDetails,
-	];
 
 	const newReleasesSlides = [];
-	for (let i = 0; i < tempMv.length; i += itemsPerSlide) {
-		const slideItems = tempMv
+	for (let i = 0; i < movieDetails.length; i += itemsPerSlide) {
+		const slideItems = movieDetails
 			.slice(i, i + itemsPerSlide)
 			.map((movie) => <MovieCard key={movie.id} movie={movie} />);
 		newReleasesSlides.push(<div className="slide-grid">{slideItems}</div>);
@@ -61,7 +53,7 @@ const MainPage = () => {
 				<Slider
 					autoSlide={5000}
 					style={{}}
-					elements={tempMv.map((movie) => (
+					elements={movieDetails.map((movie) => (
 						<div
 							key={movie.id}
 							style={{
