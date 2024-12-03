@@ -113,13 +113,17 @@ const MoviePage = () => {
 				</div>
 			</div>
 			<div className="closest-sessions">
-				{movieDetails.fiveClosestSessions.map((session) => (
-					<Link
-						style={{ textDecoration: 'none', margin: '0 0 0 15px' }}
-						to={`/booking?sessionId=${session.sessionId}`}>
-						<SessionCard key={session.sessionId} session={session} />
-					</Link>
-				))}
+				{movieDetails.fiveClosestSessions.length > 0 ? (
+					movieDetails.fiveClosestSessions.map((session) => (
+						<Link
+							style={{ textDecoration: 'none', margin: '0 0 0 15px' }}
+							to={`/booking?sessionId=${session.sessionId}`}>
+							<SessionCard key={session.sessionId} session={session} />
+						</Link>
+					))
+				) : (
+					<p style={{ margin: 'auto' }}>There is no available sessions.</p>
+				)}
 			</div>
 			<div className="similar-movies">{/* Add similar movies here */}</div>
 			<div className="leave-review-section">
@@ -151,15 +155,19 @@ const MoviePage = () => {
 				</form>
 			</div>
 			<div className="reviews">
-				{movieDetails.movieReviews.map((review) => (
-					<CommentCard
-						key={review.id}
-						createdBy={review.createdByName}
-						comment={review.comment}
-						rank={review.rank}
-						style={{ marginTop: '15px' }}
-					/>
-				))}
+				{movieDetails.movieReviews.length > 0 ? (
+					movieDetails.movieReviews.map((review) => (
+						<CommentCard
+							key={review.id}
+							createdBy={review.createdByName}
+							comment={review.comment}
+							rank={review.rank}
+							style={{ marginTop: '15px' }}
+						/>
+					))
+				) : (
+					<p>There are no comments, be the first to leave a review.</p>
+				)}
 			</div>
 		</div>
 	);
