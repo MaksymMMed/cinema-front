@@ -1,20 +1,21 @@
-.main-banner{
-
+.main-banner {
+	margin-bottom: 40px;
 }
 
-.new-movies{
-    margin-top: 40px;
-    background-color: #d9d9d9;
-    display: flex;
-    justify-content: space-between;
-    padding: 10px;
-}
- 
-.promoted-movies{
-    margin-top: 40px;
-    background-color: #d9d9d9;
-    display: flex;
-    justify-content: space-between;
-    padding: 10px;
+.new-movies {
+	background-color: #d9d9d9;
+	padding: 10px;
+	margin-bottom: 40px;
 }
 
+.slide-grid {
+	display: grid;
+	grid-template-columns: repeat(4, minmax(200px, 1fr));
+	gap: 10px;
+}
+
+.promoted-movies {
+	background-color: #d9d9d9;
+	padding: 10px;
+	margin-bottom: 40px;
+}
