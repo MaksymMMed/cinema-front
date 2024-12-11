@@ -49,7 +49,7 @@ const Slider: React.FC<SliderProps> = ({ elements, style, autoSlide }) => {
 	}, [currentIndex]);
 
 	useEffect(() => {
-		resetAutoSlide(); // Modify this line
+		resetAutoSlide();
 		return () => {
 			if (autoSlideRef.current) {
 				clearInterval(autoSlideRef.current);

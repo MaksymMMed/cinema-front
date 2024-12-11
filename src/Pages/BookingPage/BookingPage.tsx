@@ -34,7 +34,7 @@ const BookingPage = () => {
     return(
         <div className="booking-page">
             <div className='booking-movie-section'>
-                <img src={sessionDetails?.movie?.imageUrl} alt="movie" />
+                <img src={sessionDetails?.movie?.smallPosterImageUrl} alt="movie" />
                 <div className='booking-movie-info'>
                     <p style={{fontSize:'24px',fontWeight:'400'}}>{sessionDetails?.movie?.name}</p>
                     <p>{sessionDetails?.movie?.description}</p>

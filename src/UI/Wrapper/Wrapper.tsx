@@ -6,7 +6,7 @@ import Cookies from 'js-cookie';
 const Wrapper = () => {
 	const navigate = useNavigate();
 	const token = Cookies.get('token');
-	const [showSearch, setShowSearch] = useState(false); // Стан для пошукового рядка
+	const [showSearch, setShowSearch] = useState(false);
 	const [movieName, setMovieName] = useState<string>('');
 
 	const handleSearch = () => {
@@ -15,11 +15,14 @@ const Wrapper = () => {
 	};
 
 	return (
-		<div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+		<div style={{display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
 			<div
 				style={{
 					width: '100%',
 					background: '#FF7A00',
+					position: 'sticky',
+					top: 0,
+					zIndex: 1000,
 				}}>
 				<div
 					className="container"
@@ -44,21 +47,27 @@ const Wrapper = () => {
 								<Link
 									style={{ textDecoration: 'none', fontSize: '1.2em', color: 'white' }}
 									to="/profile">
-									Профіль
+									Profile
 								</Link>
 							) : (
-								<Link
-									style={{ textDecoration: 'none', fontSize: '1.2em', color: 'white' }}
-									to="/signin">
-									Увійти|Зареєструватись
-								</Link>
+								<div>
+									<Link
+										style={{ textDecoration: 'none', fontSize: '1.2em', color: 'white' }}
+										to="/signIn">
+										Sign In
+									</Link>
+									<Link 
+										style={{ textDecoration: 'none', fontSize: '1.2em', color: 'white' }}
+										to="/signUp">
+										|Sign Up
+									</Link>
+								</div>
 							)}
 						</div>
 					</div>
 				</div>
 			</div>
 
-			{/* Поле пошуку */}
 			{showSearch && (
 				<div style={{ width: '50%', padding: '1em', display: 'flex', margin: 'auto' }}>
 					<input
@@ -79,7 +88,6 @@ const Wrapper = () => {
 			)}
 
 			<Outlet />
-
 			<div
 				style={{
 					width: '100%',

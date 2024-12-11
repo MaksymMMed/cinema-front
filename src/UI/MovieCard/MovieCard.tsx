@@ -18,7 +18,7 @@ const MovieCard: React.FC<CommentProps> = ({ movie, style }) => {
 				// border: '2px solid gray',
 				...style,
 			}}>
-			<img src={movie.imageUrl} alt="img" />
+			<img src={movie.smallPosterImageUrl} style={{width:'300px'}} alt="img" />
 			<p>{movie.name}</p>
 		</Link>
 	);

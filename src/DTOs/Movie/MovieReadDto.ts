@@ -6,7 +6,8 @@ export interface MovieReadDto {
     name: string;
     directorId: string;
     directorName: string;
-    imageUrl: string;
+    smallPosterImageUrl: string;
+    largePosterImageUrl: string;
     trailerUrl: string;
     ageRestriction: string;
     duration: number; 

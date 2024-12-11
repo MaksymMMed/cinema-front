@@ -37,9 +37,13 @@ const MoviePage = () => {
 
 	useEffect(() => {
 		fetchMovieDetails();
-	}, [id]);
+	},[id]);
 
 	const handleBooking = () => {
+		if(movieDetails?.fiveClosestSessions.length === 0) {
+			alert("There is no available sessions!")
+			return
+		}
 		navigate(`/booking?sessionId=${movieDetails?.fiveClosestSessions[0].sessionId}`);
 	};
 
@@ -80,9 +84,9 @@ const MoviePage = () => {
 				)}
 			</div>
 			<div className="movie-info">
-				<div className="small-banner">
-					<img src={movieDetails.imageUrl} alt={movieDetails.name} />
-					<Button onClick={handleBooking} style={{ marginTop: '20px' }} size="xl">
+				<div className="small-banner-movie-info">
+					<img src={movieDetails.smallPosterImageUrl} alt={movieDetails.name} />
+					<Button onClick={handleBooking} style={{ marginTop: '10px' }} size="xl">
 						Booking
 					</Button>
 				</div>
@@ -116,7 +120,7 @@ const MoviePage = () => {
 				{movieDetails.fiveClosestSessions.length > 0 ? (
 					movieDetails.fiveClosestSessions.map((session) => (
 						<Link
-							style={{ textDecoration: 'none', margin: '0 0 0 15px' }}
+							className='session-link'
 							to={`/booking?sessionId=${session.sessionId}`}>
 							<SessionCard key={session.sessionId} session={session} />
 						</Link>

@@ -3,7 +3,7 @@ export interface MoviePreviewDto{
     name:string
     description:string
     directorName:string
-    imageUrl:string
+    smallPosterImageUrl: string;
     ageRestriction:string
     duration:number
     avgMark: number

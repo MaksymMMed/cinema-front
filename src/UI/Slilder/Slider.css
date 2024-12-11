@@ -2,6 +2,7 @@
 	position: relative;
 	margin: auto;
 	overflow: hidden;
+	max-height: 600px;
 }
 
 .slides {
@@ -46,8 +47,8 @@
 
 .slide-title {
 	position: absolute;
-	bottom: 20px;
-	left: 10px;
+	bottom: 200px;
+	left: 50px;
 	background-color: rgba(0, 0, 0, 0.5);
 	color: white;
 	padding: 5px;
@@ -57,8 +58,8 @@
 
 .slide-button {
 	position: absolute;
-	bottom: 20px;
-	right: 10px;
+	bottom: 160px;
+	left: 50px;
 	background-color: #ff6600de;
 	color: white;
 	border: none;

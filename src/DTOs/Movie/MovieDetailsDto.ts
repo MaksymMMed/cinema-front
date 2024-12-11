@@ -9,7 +9,8 @@ export interface MovieDetailsDto {
     description: string;
     directorId: string;
     directorName: string;
-    imageUrl: string;
+    largePosterImageUrl: string;
+    smallPosterImageUrl: string;
     trailerUrl: string;
     imagesUrls: string[];
     ageRestriction: string;

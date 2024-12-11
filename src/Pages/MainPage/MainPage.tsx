@@ -31,7 +31,7 @@ const MainPage = () => {
 		return <p>Loading...</p>;
 	}
 
-	const itemsPerSlide = 4; // Adjust this value to limit the number of cards per slide
+	const itemsPerSlide = 4;
 
 	const newReleasesSlides = [];
 	for (let i = 0; i < movieDetails.length; i += itemsPerSlide) {
@@ -52,40 +52,40 @@ const MainPage = () => {
 	return (
 		<div className="container" style={{ margin: 'auto', padding: '10px 40px' }}>
 			<div className="main-banner">
-				<h2>Сьогодні в кінотеатрі!</h2>
+				<h2>Today on cinema!</h2>
 				<Slider
 					autoSlide={5000}
-					style={{}}
+					style={{width:"80%"}}
 					elements={movieDetails.map((movie) => (
 						<div
 							key={movie.id}
 							style={{
-								// paddingLeft: 50,
-								// paddingRight: 50,
 								aspectRatio: '16/9',
 							}}>
 							<img
-								src={movie.imageUrl}
+								src={movie.largePosterImageUrl}
 								alt={movie.name}
-								style={{ width: 'auto', height: '100%', objectFit: 'contain' }}
+								style={{ width: '100%', height: 'auto', objectFit: 'contain' }}
 							/>
 							<div>
 								<div className="slide-title">
 									<span>{movie.name}</span>
 								</div>
 								<a href={`/film/${movie.id}`} className="slide-button">
-									Придбати квитки
+									Buy tickets
 								</a>
 							</div>
+							
+							
 						</div>
 					))}
 				/>
 			</div>
-			<h3 style={{ textAlign: 'left' }}>Нові фільми</h3>
+			<h3 style={{ textAlign: 'left' }}>New movies</h3>
 			<div className="new-movies">
 				<Slider elements={newReleasesSlides} />
 			</div>
-			<h3 style={{ textAlign: 'left' }}>Відібрані нами</h3>
+			<h3 style={{ textAlign: 'left' }}>Popular</h3>
 			<div className="promoted-movies">
 				<Slider elements={newReleasesSlides} />
 			</div>
