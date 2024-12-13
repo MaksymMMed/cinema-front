@@ -5,11 +5,11 @@ import Slider from '../../UI/Slilder/Slider';
 import { MovieDetailsDto } from '../../DTOs/Movie/MovieDetailsDto';
 import { getMovieDetails } from '../../Api/MovieApi';
 import Button from '../../UI/Button/Button';
-import CommentCard from '../../UI/CommentCard/CommentCard';
 import SessionCard from '../../UI/SessionCard/SessionCard';
 import Input from '../../UI/Input/Input';
 import { ReviewCreateDto } from '../../DTOs/Review/ReviewCreateDto';
 import { createReview } from '../../Api/ReviewApi';
+import ReviewsList from '../../UI/CommentList/ReviewsList';
 
 const MoviePage = () => {
 	const navigate = useNavigate();
@@ -21,8 +21,6 @@ const MoviePage = () => {
 		rank: 0,
 	});
 
-	const [error, setError] = useState<string | null>(null);
-
 	const fetchMovieDetails = async () => {
 		try {
 			if (id) {
@@ -31,7 +29,7 @@ const MoviePage = () => {
 				setReviewCreateDto((prev) => ({ ...prev, movieId: response.id }));
 			}
 		} catch (err) {
-			setError('Failed to fetch movie details.');
+			console.log('Failed to fetch movie details.');
 		}
 	};
 
@@ -158,20 +156,8 @@ const MoviePage = () => {
 					</Button>
 				</form>
 			</div>
-			<div className="reviews">
-				{movieDetails.movieReviews.length > 0 ? (
-					movieDetails.movieReviews.map((review) => (
-						<CommentCard
-							key={review.id}
-							createdBy={review.createdByName}
-							comment={review.comment}
-							rank={review.rank}
-							style={{ marginTop: '15px' }}
-						/>
-					))
-				) : (
-					<p>There are no comments, be the first to leave a review.</p>
-				)}
+			<div>
+				<ReviewsList movieId={id!}/>
 			</div>
 		</div>
 	);

@@ -56,7 +56,7 @@ const Wrapper = () => {
 										to="/signIn">
 										Sign In
 									</Link>
-									<Link 
+									<Link
 										style={{ textDecoration: 'none', fontSize: '1.2em', color: 'white' }}
 										to="/signUp">
 										|Sign Up
